@@ -1,0 +1,15 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\TankMovement.cs">
+    <Files>
+      <File FileName="Assets\Script\TankMovement.cs" Line="30" Column="21" />
+      <File FileName="Assets\Script\TorretMovement.cs" Line="28" Column="54" />
+      <File FileName="Assets\Script\Bala.cs" Line="2" Column="22" />
+      <File FileName="Assets\Script\HealingPlatform.cs" Line="33" Column="6" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
