@@ -9,6 +9,8 @@ public class TorretMovement : MonoBehaviour {
 	public KeyCode rightMovement;
 	public KeyCode shoot;
 
+	private float time = 0;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -24,11 +26,15 @@ public class TorretMovement : MonoBehaviour {
 			transform.Rotate (Vector3.up * Time.deltaTime * 30f);
 		}
 
-		if(Input.GetKeyDown(shoot)){
+		if(time >= 0){
+			time -= Time.deltaTime;
+		}
+
+		if(Input.GetKeyDown(shoot) && time <= 0){
 			if (GetComponentInParent<TankMovement> ().alive) {
+				time = 1.5f;
 				Instantiate (prefab, puntoSalida.position, puntoSalida.rotation);
 			}
-
 		}
 	}
 }
