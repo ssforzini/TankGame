@@ -1,0 +1,147 @@
+fileFormatVersion: 2
+guid: 8943e3d4d4c760d47a22b6e28f75b925
+timeCreated: 1494943427
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: 1804a7cd D
+    100002: //RootNode
+    100004: 3eac23f3 0
+    100006: 3eac23f3 1
+    100008: 3eac23f3 2
+    100010: 3eac23f3 3
+    100012: 3eac23f3 4
+    100014: 3eac23f3 D
+    100016: 937afe54 0
+    100018: 937afe54 D
+    100020: 941f311b 0
+    100022: 941f311b 1
+    100024: 941f311b D
+    100026: b9985054 D
+    100028: f5e1c24b D
+    400000: 1804a7cd D
+    400002: //RootNode
+    400004: 3eac23f3 0
+    400006: 3eac23f3 1
+    400008: 3eac23f3 2
+    400010: 3eac23f3 3
+    400012: 3eac23f3 4
+    400014: 3eac23f3 D
+    400016: 937afe54 0
+    400018: 937afe54 D
+    400020: 941f311b 0
+    400022: 941f311b 1
+    400024: 941f311b D
+    400026: b9985054 D
+    400028: f5e1c24b D
+    2300000: 1804a7cd D
+    2300002: 3eac23f3 0
+    2300004: 3eac23f3 1
+    2300006: 3eac23f3 2
+    2300008: 3eac23f3 3
+    2300010: 3eac23f3 4
+    2300012: 3eac23f3 D
+    2300014: 937afe54 0
+    2300016: 937afe54 D
+    2300018: 941f311b 0
+    2300020: 941f311b 1
+    2300022: 941f311b D
+    2300024: b9985054 D
+    2300026: f5e1c24b D
+    3300000: 1804a7cd D
+    3300002: 3eac23f3 0
+    3300004: 3eac23f3 1
+    3300006: 3eac23f3 2
+    3300008: 3eac23f3 3
+    3300010: 3eac23f3 4
+    3300012: 3eac23f3 D
+    3300014: 937afe54 0
+    3300016: 937afe54 D
+    3300018: 941f311b 0
+    3300020: 941f311b 1
+    3300022: 941f311b D
+    3300024: b9985054 D
+    3300026: f5e1c24b D
+    4300000: 941f311b D
+    4300002: f5e1c24b D
+    4300004: 941f311b 0
+    4300006: 3eac23f3 D
+    4300008: 3eac23f3 0
+    4300010: 3eac23f3 1
+    4300012: b9985054 D
+    4300014: 3eac23f3 2
+    4300016: 1804a7cd D
+    4300018: 3eac23f3 3
+    4300020: 937afe54 D
+    4300022: 937afe54 0
+    4300024: 941f311b 1
+    4300026: 3eac23f3 4
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
