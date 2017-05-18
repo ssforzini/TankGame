@@ -14,10 +14,12 @@ public class TankMovement : MonoBehaviour {
 	private float valocityBack;
 	private bool collisionTerrain;
 
+	private string buttonPress = "";
+
 
 	// Use this for initialization
 	void Start () {
-		life = 50;
+		life = 100;
 		alive = true;
 	}
 	
@@ -34,19 +36,23 @@ public class TankMovement : MonoBehaviour {
 			if(Input.GetKey(keys[0])){
 				//transform.Translate (Vector3.right * Time.deltaTime * speed);
 				GetComponent<Rigidbody>().AddForce(transform.right * Time.deltaTime * speed);
+				buttonPress = "up";
 			}
 
 			if(Input.GetKey(keys[1])){
 				//transform.Translate (Vector3.left * Time.deltaTime * speed);
 				GetComponent<Rigidbody>().AddForce(-transform.right * Time.deltaTime * speed);
+				buttonPress = "down";
 			}
 
 			if(Input.GetKey(keys[2])){
 				transform.Rotate (Vector3.up * Time.deltaTime * rotateSpeed);
+				buttonPress = "right";
 			}
 
 			if(Input.GetKey(keys[3])){
 				transform.Rotate (Vector3.down * Time.deltaTime * rotateSpeed);
+				buttonPress = "left";
 			}
 		}
 
@@ -58,8 +64,8 @@ public class TankMovement : MonoBehaviour {
 			GetComponent<BoxCollider> ().enabled = false;
 			GetComponent<Rigidbody> ().isKinematic = true;
 			alive = false;
-		} else if(life > 50f){
-			life = 50f;
+		} else if(life > 100f){
+			life = 100f;
 		}
 
 	}
@@ -72,6 +78,11 @@ public class TankMovement : MonoBehaviour {
 	void OnCollisionExit(Collision col){
 		if(col.gameObject.name == "Terrain" || col.gameObject.tag == "Bridges"){
 			collisionTerrain = false;
+			if(buttonPress == "up"){
+				GetComponent<Rigidbody>().AddForce(transform.right * Time.deltaTime * speed / 4,ForceMode.Impulse);
+			} else if(buttonPress == "down") {
+				GetComponent<Rigidbody>().AddForce(-transform.right * Time.deltaTime * speed / 4, ForceMode.Impulse);
+			}
 		}
 	}
 }

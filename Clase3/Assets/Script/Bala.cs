@@ -22,7 +22,7 @@ public class Bala : MonoBehaviour {
 					GameObject.Find ("EnemyTankLife").GetComponent<Slider>().value += 0.20f;
 				}
 
-				col.gameObject.GetComponent<TankMovement> ().life -= 10f;
+				col.gameObject.GetComponent<TankMovement> ().life -= 20f;
 				Destroy (gameObject);
 			}
 		}
