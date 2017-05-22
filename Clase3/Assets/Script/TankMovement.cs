@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class TankMovement : MonoBehaviour {
 
-	public float life;
-	public bool alive;
-	[SerializeField] private float speed;
-	[SerializeField] private float rotateSpeed;
+	[HideInInspector] public float life;
+	[HideInInspector] public int numberOfLifes;
+	[HideInInspector] public bool alive;
 
 	public KeyCode[] keys;
 	public GameObject[] checkpoints;
@@ -13,19 +13,28 @@ public class TankMovement : MonoBehaviour {
 	private float velocityForward;
 	private float valocityBack;
 	private bool collisionTerrain;
+	public GameObject slider;
+	public GameObject text;
+	private GameObject dead;
+
+	[SerializeField] private float deadXPos;
+
+	[SerializeField] private float speed;
+	[SerializeField] private float rotateSpeed;
 
 	private string buttonPress = "";
-
 
 	// Use this for initialization
 	void Start () {
 		life = 100;
+		numberOfLifes = 1;
+		text.GetComponent<Text> ().text = numberOfLifes.ToString ();
 		alive = true;
+		dead = GameObject.Find ("DeadText");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//GetComponent<Rigidbody>().AddForce(-transform.up * Time.deltaTime * 7500f);
 
 		if(Input.GetKeyDown(keys[4])){
 			transform.position = checkpoints[Random.Range(0,checkpoints.Length)].GetComponent<Transform>().position;
@@ -34,13 +43,11 @@ public class TankMovement : MonoBehaviour {
 
 		if(collisionTerrain){
 			if(Input.GetKey(keys[0])){
-				//transform.Translate (Vector3.right * Time.deltaTime * speed);
 				GetComponent<Rigidbody>().AddForce(transform.right * Time.deltaTime * speed);
 				buttonPress = "up";
 			}
 
 			if(Input.GetKey(keys[1])){
-				//transform.Translate (Vector3.left * Time.deltaTime * speed);
 				GetComponent<Rigidbody>().AddForce(-transform.right * Time.deltaTime * speed);
 				buttonPress = "down";
 			}
@@ -57,13 +64,25 @@ public class TankMovement : MonoBehaviour {
 		}
 
 
-		if(life == 0){
-			foreach (Renderer r in GetComponentsInChildren<Renderer>()) {
-				r.enabled = false;
+		if(life == 0 && alive){
+			numberOfLifes--;
+			text.GetComponent<Text> ().text = numberOfLifes.ToString ();
+			if (numberOfLifes <= 0) {
+				foreach (Renderer r in GetComponentsInChildren<Renderer>()) {
+					r.enabled = false;
+				}
+				GetComponent<BoxCollider> ().enabled = false;
+				GetComponent<Rigidbody> ().isKinematic = true;
+				alive = false;
+				dead.GetComponent<RectTransform> ().localPosition = new Vector3 (deadXPos,0,0);
+				dead.GetComponent<Text> ().text = "YOU ARE \n  DEAD";
+			} else {
+				life = 100f;
+				slider.GetComponent<Slider> ().value = 0f;
+
+				transform.position = checkpoints[Random.Range(0,checkpoints.Length)].GetComponent<Transform>().position;
+				transform.rotation = new Quaternion (0,0,0,0);
 			}
-			GetComponent<BoxCollider> ().enabled = false;
-			GetComponent<Rigidbody> ().isKinematic = true;
-			alive = false;
 		} else if(life > 100f){
 			life = 100f;
 		}
