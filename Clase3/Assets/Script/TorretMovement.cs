@@ -11,9 +11,14 @@ public class TorretMovement : MonoBehaviour {
 
 	private float time = 0;
 
-	// Use this for initialization
-	void Start () {
-		
+	/* GET COMPONENT */
+	private TankMovement tnk;
+	private AudioSource src;
+	/* END COMPONENT */
+
+	void Awake(){
+		tnk = GetComponentInParent<TankMovement> ();
+		src = GameObject.Find ("Fire").GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -31,7 +36,8 @@ public class TorretMovement : MonoBehaviour {
 		}
 
 		if(Input.GetKeyDown(shoot) && time <= 0){
-			if (GetComponentInParent<TankMovement> ().alive) {
+			src.Play ();
+			if (tnk.alive) {
 				time = 1.5f;
 				Instantiate (prefab, puntoSalida.position, puntoSalida.rotation);
 			}

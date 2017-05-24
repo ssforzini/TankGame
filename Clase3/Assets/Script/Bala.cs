@@ -6,9 +6,22 @@ using UnityEngine;
 public class Bala : MonoBehaviour {
 
 	public float fuerza;
-	// Use this for initialization
+
+	/* GET COMPONENTS */
+	private Rigidbody rb;
+	private Slider enemySld;
+	private Slider tankSld;
+	private AudioSource src;
+	/* END GET COMPONENTS */
+
+	void Awake(){
+		src = GameObject.Find ("Explosion").GetComponent<AudioSource> ();
+		rb = GetComponent<Rigidbody> ();
+		enemySld = GameObject.Find ("EnemyTankLife").GetComponent<Slider> ();
+		tankSld = GameObject.Find ("TankLife").GetComponent<Slider> ();
+	}
 	void Start () {
-		GetComponent<Rigidbody> ().AddRelativeForce (Vector3.right * fuerza, ForceMode.Impulse);
+		rb.AddRelativeForce (Vector3.right * fuerza, ForceMode.Impulse);
 		Destroy (gameObject,2.0f);
 	}
 
@@ -17,14 +30,15 @@ public class Bala : MonoBehaviour {
 			if(col.gameObject.GetComponent<TankMovement> ().life > 0){
 
 				if (col.gameObject.name == "Tanque") {
-					GameObject.Find ("TankLife").GetComponent<Slider> ().value += 0.20f;
+					tankSld.value += 0.20f;
 				} else {
-					GameObject.Find ("EnemyTankLife").GetComponent<Slider>().value += 0.20f;
+					enemySld.value += 0.20f;
 				}
 
 				col.gameObject.GetComponent<TankMovement> ().life -= 20f;
-				Destroy (gameObject);
 			}
 		}
+		src.Play ();
+		Destroy (gameObject);
 	}
 }

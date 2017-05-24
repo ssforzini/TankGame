@@ -9,6 +9,17 @@ public class Diamond : MonoBehaviour {
 	private bool active;
 	private float timeNotActive;
 
+	/* GET COMPONENTS */
+	private Renderer[] rend;
+	private Slider enemySld;
+	private Slider tankSld;
+	/* END GET COMPONENTS */
+
+	void Awake(){
+		rend = gameObject.GetComponentsInChildren<Renderer> ();
+		enemySld = GameObject.Find ("EnemyTankLife").GetComponent<Slider> ();
+		tankSld = GameObject.Find ("TankLife").GetComponent<Slider> ();
+	}
 	void Start(){
 		movement = Random.Range (0,2);
 		timeNotActive = 10f;
@@ -27,9 +38,9 @@ public class Diamond : MonoBehaviour {
 			if(timeNotActive <= 0f){
 				timeNotActive = 10f;
 				active = true;
-				for(int i = 0; i < gameObject.GetComponentsInChildren<Renderer> ().Length; i++){
-					if(gameObject.GetComponentsInChildren<Renderer> ()[i].name == "Disc"){
-						gameObject.GetComponentsInChildren<Renderer> ()[i].enabled = true;
+				for(int i = 0; i < rend.Length; i++){
+					if(rend[i].name == "Disc"){
+						rend[i].enabled = true;
 					}
 				}
 			}
@@ -43,12 +54,12 @@ public class Diamond : MonoBehaviour {
 			if(col.gameObject.tag == "tank"){
 				if(col.gameObject.GetComponent<TankMovement>().alive){
 					if (col.gameObject.name == "Tanque") {
-						if(GameObject.Find ("TankLife").GetComponent<Slider> ().value < 1.0f){
-							GameObject.Find ("TankLife").GetComponent<Slider> ().value -= 0.15f;
+						if(tankSld.value < 1.0f){
+							tankSld.value -= 0.15f;
 						}
 					} else {
-						if (GameObject.Find ("EnemyTankLife").GetComponent<Slider> ().value < 1.0f) {
-							GameObject.Find ("EnemyTankLife").GetComponent<Slider> ().value -= 0.15f;
+						if (enemySld.value < 1.0f) {
+							enemySld.value -= 0.15f;
 						}
 					}
 					col.gameObject.GetComponent<TankMovement> ().life += 15f;
@@ -57,9 +68,9 @@ public class Diamond : MonoBehaviour {
 		}
 
 		active = false;
-		for(int i = 0; i < gameObject.GetComponentsInChildren<Renderer> ().Length; i++){
-			if(gameObject.GetComponentsInChildren<Renderer> ()[i].name == "Disc"){
-				gameObject.GetComponentsInChildren<Renderer> ()[i].enabled = false;
+		for(int i = 0; i < rend.Length; i++){
+			if(rend[i].name == "Disc"){
+				rend[i].enabled = false;
 			}
 		}
 	}

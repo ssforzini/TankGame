@@ -15,7 +15,6 @@ public class TankMovement : MonoBehaviour {
 	private bool collisionTerrain;
 	public GameObject slider;
 	public GameObject text;
-	private GameObject dead;
 
 	[SerializeField] private float deadXPos;
 
@@ -24,41 +23,61 @@ public class TankMovement : MonoBehaviour {
 
 	private string buttonPress = "";
 
-	// Use this for initialization
+	/* GET COMPONENTS */
+	private RectTransform dPos;
+	private Text dText;
+	private Rigidbody rb;
+	private Text tText;
+	private BoxCollider bcl;
+	private Slider sld;
+	private AudioSource srcMusic;
+	private AudioSource srcGameEnd;
+	/* END GET COMPONENTS */
+
+	void Awake(){
+		dPos = GameObject.Find ("DeadText").GetComponent<RectTransform> ();
+		dText = GameObject.Find ("DeadText").GetComponent<Text> ();
+		rb = GetComponent<Rigidbody> ();
+		tText = text.GetComponent<Text> ();
+		bcl = GetComponent<BoxCollider> ();
+		sld = slider.GetComponent<Slider> ();
+		srcMusic = GameObject.Find ("Music").GetComponent<AudioSource> ();
+		srcGameEnd = GameObject.Find ("GameEnd").GetComponent<AudioSource> ();
+	}
+
 	void Start () {
 		life = 100;
 		numberOfLifes = 1;
-		text.GetComponent<Text> ().text = numberOfLifes.ToString ();
+		tText.text = numberOfLifes.ToString ();
 		alive = true;
-		dead = GameObject.Find ("DeadText");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		if(Input.GetKeyDown(keys[4])){
-			transform.position = checkpoints[Random.Range(0,checkpoints.Length)].GetComponent<Transform>().position;
+		if(Input.GetKeyDown(keys[4]) && transform.rotation.z > 150f){
+			transform.position = checkpoints[Random.Range(0,checkpoints.Length)].transform.position;
 			transform.rotation = new Quaternion (0,0,0,0);
 		}
 
 		if(collisionTerrain){
 			if(Input.GetKey(keys[0])){
-				GetComponent<Rigidbody>().AddForce(transform.right * Time.deltaTime * speed);
+				rb.AddForce(transform.right * Time.deltaTime * speed);
 				buttonPress = "up";
 			}
 
 			if(Input.GetKey(keys[1])){
-				GetComponent<Rigidbody>().AddForce(-transform.right * Time.deltaTime * speed);
+				rb.AddForce(-transform.right * Time.deltaTime * speed);
 				buttonPress = "down";
 			}
 
 			if(Input.GetKey(keys[2])){
-				transform.Rotate (Vector3.up * Time.deltaTime * rotateSpeed);
+				rb.AddTorque (Vector3.up * Time.deltaTime * rotateSpeed);
 				buttonPress = "right";
 			}
 
 			if(Input.GetKey(keys[3])){
-				transform.Rotate (Vector3.down * Time.deltaTime * rotateSpeed);
+				rb.AddTorque (Vector3.down * Time.deltaTime * rotateSpeed);
 				buttonPress = "left";
 			}
 		}
@@ -66,21 +85,23 @@ public class TankMovement : MonoBehaviour {
 
 		if(life == 0 && alive){
 			numberOfLifes--;
-			text.GetComponent<Text> ().text = numberOfLifes.ToString ();
+			tText.text = numberOfLifes.ToString ();
 			if (numberOfLifes <= 0) {
 				foreach (Renderer r in GetComponentsInChildren<Renderer>()) {
 					r.enabled = false;
 				}
-				GetComponent<BoxCollider> ().enabled = false;
-				GetComponent<Rigidbody> ().isKinematic = true;
+				bcl.enabled = false;
+				rb.isKinematic = true;
 				alive = false;
-				dead.GetComponent<RectTransform> ().localPosition = new Vector3 (deadXPos,0,0);
-				dead.GetComponent<Text> ().text = "YOU ARE \n  DEAD";
+				dPos.localPosition = new Vector3 (deadXPos,0,0);
+				dText.text = "YOU ARE \n  DEAD";
+				srcMusic.Stop ();
+				srcGameEnd.Play ();
 			} else {
 				life = 100f;
-				slider.GetComponent<Slider> ().value = 0f;
+				sld.value = 0f;
 
-				transform.position = checkpoints[Random.Range(0,checkpoints.Length)].GetComponent<Transform>().position;
+				transform.position = checkpoints[Random.Range(0,checkpoints.Length)].transform.position;
 				transform.rotation = new Quaternion (0,0,0,0);
 			}
 		} else if(life > 100f){
@@ -98,9 +119,9 @@ public class TankMovement : MonoBehaviour {
 		if(col.gameObject.name == "Terrain" || col.gameObject.tag == "Bridges"){
 			collisionTerrain = false;
 			if(buttonPress == "up"){
-				GetComponent<Rigidbody>().AddForce(transform.right * Time.deltaTime * speed / 4,ForceMode.Impulse);
+				rb.AddForce(transform.right * Time.deltaTime * speed / 4,ForceMode.Impulse);
 			} else if(buttonPress == "down") {
-				GetComponent<Rigidbody>().AddForce(-transform.right * Time.deltaTime * speed / 4, ForceMode.Impulse);
+				rb.AddForce(-transform.right * Time.deltaTime * speed / 4, ForceMode.Impulse);
 			}
 		}
 	}
