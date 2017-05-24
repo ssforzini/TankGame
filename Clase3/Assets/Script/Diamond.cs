@@ -20,6 +20,7 @@ public class Diamond : MonoBehaviour {
 		enemySld = GameObject.Find ("EnemyTankLife").GetComponent<Slider> ();
 		tankSld = GameObject.Find ("TankLife").GetComponent<Slider> ();
 	}
+
 	void Start(){
 		movement = Random.Range (0,2);
 		timeNotActive = 10f;
@@ -52,7 +53,7 @@ public class Diamond : MonoBehaviour {
 		
 		if(active){
 			if(col.gameObject.tag == "tank"){
-				if(col.gameObject.GetComponent<TankMovement>().alive){
+				if(col.gameObject.GetComponent<TankLife>().getAlive()){
 					if (col.gameObject.name == "Tanque") {
 						if(tankSld.value < 1.0f){
 							tankSld.value -= 0.15f;
@@ -62,7 +63,7 @@ public class Diamond : MonoBehaviour {
 							enemySld.value -= 0.15f;
 						}
 					}
-					col.gameObject.GetComponent<TankMovement> ().life += 15f;
+					col.gameObject.GetComponent<TankLife> ().setLife(col.gameObject.GetComponent<TankLife> ().getLife() + 15f);
 				}
 			}
 		}

@@ -27,7 +27,7 @@ public class Bala : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col){
 		if(col.gameObject.name == "Tanque" || col.gameObject.name == "TanqueEnemigo"){
-			if(col.gameObject.GetComponent<TankMovement> ().life > 0){
+			if(col.gameObject.GetComponent<TankLife> ().getLife() > 0){
 
 				if (col.gameObject.name == "Tanque") {
 					tankSld.value += 0.20f;
@@ -35,7 +35,7 @@ public class Bala : MonoBehaviour {
 					enemySld.value += 0.20f;
 				}
 
-				col.gameObject.GetComponent<TankMovement> ().life -= 20f;
+				col.gameObject.GetComponent<TankLife> ().setLife(col.gameObject.GetComponent<TankLife> ().getLife() - 20f);
 			}
 		}
 		src.Play ();
